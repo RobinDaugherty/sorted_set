@@ -1,3 +1,5 @@
+[![test](https://github.com/RobinDaugherty/sorted_set/actions/workflows/test.yml/badge.svg)](https://github.com/RobinDaugherty/sorted_set/actions/workflows/test.yml)
+
 # SortedSet
 
 SortedSet implements a Set whose elements are sorted in ascending
@@ -11,21 +13,20 @@ elements.  Otherwise ArgumentError will be raised.
 Currently this library does nothing for JRuby, as it has its own
 version of Set and SortedSet.
 
+**Why does this fork exist?**
+
+- Instead of rbtree, uses [rbtree3](https://github.com/kyrylo/rbtree3) which builds successfully for M1 macs
+- Includes CI testing on macOS ARM64 as well as Ubuntu, and with the latest releases of Ruby
+
 ## Installation
+
+(Currently this fork is not published in rubygems.)
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sorted_set'
+gem 'sorted_set', git: 'https://github.com/RobinDaugherty/sorted_set'
 ```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install sorted_set
 
 ## Usage
 
@@ -51,7 +52,7 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/knu/sorted_set.
+Bug reports and pull requests are welcome on GitHub at https://github.com/RobinDaugherty/sorted_set.
 
 ## License
 
