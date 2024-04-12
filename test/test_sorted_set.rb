@@ -2,6 +2,8 @@ require 'test/unit'
 require 'sorted_set'
 
 class TC_SortedSet < Test::Unit::TestCase
+  # Ruby 2.4 does not define FrozenError, it instead raises RuntimeError
+  # So preserve that behavior for compatibility
   FrozenError = RuntimeError unless defined?(FrozenError)
 
   def test_sortedset
