@@ -2,6 +2,10 @@ name: test
 
 on: [push, pull_request]
 
+# Stop previous jobs if a new one starts
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   test:
     strategy:
