@@ -49,9 +49,69 @@ end
 # ```
 
 class SortedSet < Set
-  # Creates a SortedSet.  See Set.new for details.
+  class << self
+    def [](*ary)        # :nodoc:
+      new(ary)
+    end
+  end
+
   def initialize(*args)
-    @hash = RBTree.new
+    @keys = nil
     super
+  end
+
+  def clear
+    @keys = nil
+    super
+  end
+
+  def replace(enum)
+    @keys = nil
+    super
+  end
+
+  def add(o)
+    o.respond_to?(:<=>) or raise ArgumentError, "value must respond to <=>"
+    @keys = nil
+    super
+  end
+  alias << add
+
+  def delete(o)
+    @keys = nil
+    @hash.delete(o)
+    self
+  end
+
+  def delete_if
+    block_given? or return enum_for(__method__)
+    n = @hash.size
+    super
+    @keys = nil if @hash.size != n
+    self
+  end
+
+  def keep_if
+    block_given? or return enum_for(__method__)
+    n = @hash.size
+    super
+    @keys = nil if @hash.size != n
+    self
+  end
+
+  def merge(enum)
+    @keys = nil
+    super
+  end
+
+  def each(&block)
+    block or return enum_for(__method__)
+    to_a.each(&block)
+    self
+  end
+
+  def to_a
+    (@keys = @hash.keys).sort! unless @keys
+    @keys
   end
 end
